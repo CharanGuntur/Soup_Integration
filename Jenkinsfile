@@ -12,6 +12,12 @@ pipeline {
                 echo 'Testing..'
             }
         }
+        stage('batchscript') {
+          steps{
+          bat '''testrunner.bat "c:\\my projects\\my-project.xml"
+                 testrunner.bat -FPDF -R"JUnit-Style HTML Report" -c"my test case" c:\\my projects\\my-project.xml'''
+            }
+       }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
