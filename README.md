@@ -1,4 +1,4 @@
 # Soup_Integration
 # Sample_test_suits
-# Deafault.xml
+# Default.xml
 #pom.xml
