@@ -12,11 +12,11 @@ pipeline {
                 echo 'Testing..'
             }
         }
-        stage('batchscript') {
-          steps{
-          bat '''testrunner.bat "c:\\my projects\\my-project.xml" '''
-            }
-       }
+       // stage('batchscript') {
+       //   steps{
+        //  bat '''testrunner.bat "c:\\my projects\\my-project.xml" '''
+      //      }
+   //    }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
