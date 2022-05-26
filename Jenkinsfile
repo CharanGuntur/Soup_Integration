@@ -3,7 +3,7 @@ agent any
 
     tools {
         maven 'Default'
-        jdk 'jdk8'
+        jdk 'JDK11'
     }
     stages {
         stage('Test') {
