@@ -4,6 +4,7 @@ agent any
     tools {
         maven 'Default'
         jdk 'JDK11'
+        git 'Default'
     }
     stages {
         stage('Test') {
