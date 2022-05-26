@@ -9,7 +9,7 @@ agent any
     stages {
         stage('Test') {
             steps {
-                bat '''mvn clean'''
+                bat '''mvn clean test'''
               //  readFile 'https://github.com/CharanGuntur/Soup_Integration/blob/master/sample.xml'
             }
             //post {
