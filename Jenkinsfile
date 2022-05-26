@@ -9,7 +9,8 @@ agent any
     stages {
         stage('Test') {
             steps {
-                bat '''mvn clean test'''
+                bat '''mvn clean test -sTestSuit1 -c"CapitalCity TestCase" CountryInfoService-soapui-project.xml'''
+                
               //  readFile 'https://github.com/CharanGuntur/Soup_Integration/blob/master/sample.xml'
             }
             //post {
