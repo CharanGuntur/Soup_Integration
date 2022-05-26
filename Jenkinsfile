@@ -1,27 +1,20 @@
 pipeline {
-    agent any
+agent any
 
+    tools {
+        maven 'maven3'
+        jdk 'jdk8'
+    }
     stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                sh ''' mvn clean test '''
             }
-        }
-       // stage('batchscript') {
-       //   steps{
-        //  bat '''testrunner.bat "c:\\my projects\\my-project.xml" '''
-      //      }
-   //    }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+            post {
+              always {
+                archiveArtifacts 'target/surefire-reports/**/*.xml'
+                junit 'target/surefire-reports/**/*.xml'
+                }
             }
-        }
-    }
-    
+     }
 }
