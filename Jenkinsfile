@@ -9,7 +9,7 @@ agent any
     stages {
         stage('Test') {
             steps {
-                sh ''' mvn clean '''
+                sh '''mvn clean'''
               //  readFile 'https://github.com/CharanGuntur/Soup_Integration/blob/master/sample.xml'
             }
             //post {
