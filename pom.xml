@@ -1,0 +1,101 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.smartbear.samples</groupId>
+    <artifactId>soapui-maven-plugin</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>Maven SoapUI project</name>
+    <url>http://maven.apache.org</url>
+<pluginRepositories>
+    <pluginRepository>
+        <id>SmartBearPluginRepository</id>
+        <url>http://www.soapui.org/repository/maven2/</url>
+    </pluginRepository>
+	<!--pluginRepository>
+        <id>eviwarePluginRepository</id>
+        <url>https://repo.maven.apache.org/maven2/</url>
+    </pluginRepository-->
+</pluginRepositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.smartbear.soapui</groupId>
+                <artifactId>soapui-maven-plugin</artifactId>
+                <version>5.3.0</version>
+		<dependencies>
+		
+        <dependency>
+          <groupId>com.jgoodies</groupId>
+          <artifactId>forms</artifactId>
+          <version>1.0.7</version>
+        </dependency>
+        <dependency>
+          <groupId>com.smartbear.soapui</groupId>
+          <artifactId>soapui</artifactId>
+          <version>5.3.0</version>
+          <exclusions>
+            <exclusion>
+              <groupId>javafx</groupId>
+              <artifactId>jfxrt</artifactId>
+            </exclusion>
+          </exclusions>
+        </dependency>
+      </dependencies>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                           <projectFile>RestCountries-soapui-project.xml</projectFile>
+								<endpoint>https://restcountries.eu</endpoint>
+								<junitReport>true</junitReport>
+								<!-- The path is reqd to be as below, the default path for surefire reports: target/surefire-reports -->
+                            <outputFolder>${basedir}/target/surefire-reports</outputFolder>
+                            <printReport>true</printReport>
+                            <exportAll>true</exportAll>
+								<testFailIgnore>true</testFailIgnore>
+								<projectProperties>
+										<value>property1=fromMaven1</value>
+										<value>property2=fromMaven1</value>
+								</projectProperties>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+			<!--Add Maven Site Plugin.-->
+			<!--This plugin tests and prepares test data for Maven SureFire plugin-->
+			<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.7.1</version>
+        <configuration>
+          <outputDirectory>${basedir}/target/site-reports</outputDirectory>
+        </configuration>
+      </plugin>
+        </plugins>
+    </build>
+<!-- Adding SureFire plugin to generate surefire reports.-->
+<reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>3.0.0-M4</version>
+        <configuration>
+          <!--outputDirectory>${basedir}/target/surefire-reports</outputDirectory-->
+		  <testFailureIgnore>true</testFailureIgnore>
+        </configuration>
+      </plugin>
+	<!-- This below if required for maven-surefire-report-plugin, else some warning -->
+	 <plugin> 
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-project-info-reports-plugin</artifactId>
+		<version>3.0.0</version>
+	</plugin>
+    </plugins>
+  </reporting>
+</project>
